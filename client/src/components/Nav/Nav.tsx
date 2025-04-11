@@ -21,6 +21,8 @@ import NavToggle from './NavToggle';
 import NewChat from './NewChat';
 import { cn } from '~/utils';
 import store from '~/store';
+import MenuSettings from './MenuSettings';
+import { GearIcon } from '~/components/svg';
 
 const Nav = ({
   navVisible,
@@ -37,6 +39,7 @@ const Nav = ({
   const isSmallScreen = useMediaQuery('(max-width: 768px)');
   const [newUser, setNewUser] = useLocalStorage('newUser', true);
   const [isToggleHovering, setIsToggleHovering] = useState(false);
+  const [isMenuSettingsOpen, setIsMenuSettingsOpen] = useState(false);
 
   const hasAccessToBookmarks = useHasAccess({
     permissionType: PermissionTypes.BOOKMARKS,
@@ -87,7 +90,7 @@ const Nav = ({
     hasNextPage: searchQuery ? searchQueryRes?.hasNextPage : hasNextPage,
     fetchNextPage: searchQuery ? searchQueryRes?.fetchNextPage : fetchNextPage,
     isFetchingNextPage: searchQuery
-      ? searchQueryRes?.isFetchingNextPage ?? false
+      ? (searchQueryRes?.isFetchingNextPage ?? false)
       : isFetchingNextPage,
   });
 
@@ -188,6 +191,17 @@ const Nav = ({
                       <Spinner className={cn('m-1 mx-auto mb-4 h-4 w-4 text-text-primary')} />
                     )}
                   </div>
+                  <div className="menu">
+                    <button
+                      onClick={() => setIsMenuSettingsOpen(true)}
+                      className="flex w-full items-center gap-3 rounded-md px-3 py-3 text-sm text-text-primary hover:bg-surface-secondary"
+                    >
+                      {/* <GearIcon className="h-4 w-4" />
+                      {localize('com_nav_settings')} */}
+                      {'View'}
+                    </button>
+                  </div>
+                  <MenuSettings open={isMenuSettingsOpen} onOpenChange={setIsMenuSettingsOpen} />
                   <AccountSettings />
                 </nav>
               </div>

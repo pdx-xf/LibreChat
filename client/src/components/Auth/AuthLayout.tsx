@@ -62,10 +62,15 @@ function AuthLayout({
       <Banner />
       <BlinkAnimation active={isFetching}>
         <div className="mt-6 h-10 w-full bg-cover">
-          <img
+          {/* <img
             src="/assets/logo.svg"
             className="h-full w-full object-contain"
             alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? 'LibreChat' })}
+          /> */}
+          <img
+            src="https://us05st1.zoom.us/zoom.ico"
+            className="h-full w-full object-contain"
+            alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? 'CustomLibreChat' })}
           />
         </div>
       </BlinkAnimation>
@@ -87,8 +92,8 @@ function AuthLayout({
           {children}
           {!pathname.includes('2fa') &&
             (pathname.includes('login') || pathname.includes('register')) && (
-            <SocialLoginRender startupConfig={startupConfig} />
-          )}
+              <SocialLoginRender startupConfig={startupConfig} />
+            )}
         </div>
       </div>
       <Footer startupConfig={startupConfig} />

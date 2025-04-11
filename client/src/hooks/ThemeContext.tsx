@@ -21,7 +21,7 @@ export const isDark = (theme: string): boolean => {
   if (theme === 'system') {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
-  return theme === 'dark';
+  return theme === 'dark' || theme === 'blue';
 };
 
 export const ThemeContext = createContext<ProviderValue>(defaultContextValue);
@@ -32,10 +32,15 @@ export const ThemeProvider = ({ initialTheme, children }) => {
 
   const rawSetTheme = (rawTheme: string) => {
     const root = window.document.documentElement;
-    const darkMode = isDark(rawTheme);
+    const isDarkTheme = isDark(rawTheme);
+    const isBlueTheme = rawTheme === 'blue';
 
-    root.classList.remove(darkMode ? 'light' : 'dark');
-    root.classList.add(darkMode ? 'dark' : 'light');
+    root.classList.remove('dark', 'light', 'blue');
+    if (isBlueTheme) {
+      root.classList.add('blue');
+    } else {
+      root.classList.add(isDarkTheme ? 'dark' : 'light');
+    }
 
     localStorage.setItem('color-theme', rawTheme);
   };

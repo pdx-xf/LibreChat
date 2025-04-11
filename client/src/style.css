@@ -40,9 +40,19 @@
   --red-800: #991b1b;
   --red-900: #7f1d1d;
   --red-950: #450a0a;
-  --gizmo-gray-500: #999;
-  --gizmo-gray-600: #666;
-  --gizmo-gray-950: #0f0f0f;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-850: #1e3a8a;
+  --blue-900: #1e3a8a;
+  --blue-950: #172554;
+
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -107,6 +117,7 @@ html {
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
   --switch-unchecked: 0 0% 58%;
+  --surface-topbar: var(--gray-50);
 }
 .dark {
   --presentation: var(--gray-800);
@@ -164,42 +175,73 @@ html {
   --chart-4: 280 65% 60%;
   --chart-5: 340 75% 55%;
   --switch-unchecked: 0 0% 40%;
+  --surface-topbar: var(--gray-900);
 }
-.gizmo {
-  --text-primary: var(--gizmo-gray-950);
-  --text-secondary: var(--gizmo-gray-600);
-  --text-tertiary: var(--gizmo-gray-500);
-  --surface-primary: var(--white);
-  --surface-secondary: var(--gray-50);
-  --surface-tertiary: var(--gray-100);
-  --border-light: rgba(0, 0, 0, 0.1);
-  --border-medium: rgba(0, 0, 0, 0.15);
-  --border-heavy: rgba(0, 0, 0, 0.2);
-  --border-xheavy: rgba(0, 0, 0, 0.25);
-}
-.gizmo.dark {
+.blue {
+  --presentation: var(--blue-800);
   --text-primary: var(--gray-100);
   --text-secondary: var(--gray-300);
-  --text-tertiary: var(--gizmo-gray-500);
-  --surface-primary: var(--gray-900);
-  --surface-secondary: var(--gray-800);
-  --surface-tertiary: var(--gray-700);
-  --border-light: rgba(217, 217, 227, 0.1);
-  --border-medium: rgba(217, 217, 227, 0.15);
-  --border-heavy: rgba(217, 217, 227, 0.2);
-  --border-xheavy: rgba(217, 217, 227, 0.25);
+  --text-secondary-alt: var(--gray-400);
+  --text-tertiary: var(--gray-500); /* 改用灰色替代蓝色，提高可读性 */
+  --header-primary: var(--gray-700);
+  --header-hover: var(--gray-600);
+  --header-button-hover: var(--gray-700);
+  --surface-active: var(--blue-500);
+  --surface-active-alt: var(--blue-700);
+  --surface-hover: var(--blue-600);
+  --surface-hover-alt: var(--blue-600);
+  --surface-primary: var(--blue-900);
+  --surface-primary-alt: var(--blue-850);
+  --surface-primary-contrast: var(--blue-850);
+  --surface-secondary: var(--blue-800);
+  --surface-secondary-alt: var(--blue-800);
+  --surface-tertiary: var(--blue-700);
+  --surface-tertiary-alt: var(--blue-700);
+  --surface-dialog: var(--blue-850);
+  --surface-submit: var(--green-700);
+  --surface-submit-hover: var(--green-800);
+  --surface-destructive: var(--red-800);
+  --surface-destructive-hover: var(--red-900);
+  --surface-chat: var(--blue-700);
+  --border-light: var(--blue-700);
+  --border-medium-alt: var(--blue-600);
+  --border-medium: var(--blue-600);
+  --border-heavy: var(--blue-500);
+  --border-xheavy: var(--blue-400);
+
+  --background: 212 96% 78%;
+  --foreground: 212 96% 98%;
+  --card: 210 100% 3.9%;
+  --card-foreground: 210 100% 98%;
+  --primary: 210 100% 98%;
+  --primary-foreground: 210 100% 9%;
+  --secondary: 210 100% 14.9%;
+  --secondary-foreground: 210 100% 98%;
+  --muted: 210 100% 14.9%;
+  --muted-foreground: 210 100% 63.9%;
+  --accent: 210 100% 14.9%;
+  --accent-foreground: 210 100% 98%;
+  --destructive: 0 62.8% 40.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 210 100% 14.9%;
+  --input: 210 100% 14.9%;
+  --ring: 210 100% 83.1%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  --switch-unchecked: 210 100% 40%;
+  --surface-topbar: var(--blue-900);
 }
 
 .text-token-text-primary {
-  color: #171717;
   color: var(--text-primary);
 }
 .text-token-text-secondary {
-  color: #565869;
   color: var(--text-secondary);
 }
 .text-token-text-tertiary {
-  color: #8e8ea0;
   color: var(--text-tertiary);
 }
 
@@ -244,22 +286,18 @@ html {
 }
 
 .border-token-border-heavy {
-  border-color: #c5c5d2;
   border-color: var(--border-heavy);
 }
 
 .border-token-border-light {
-  border-color: #ececf1;
   border-color: var(--border-light);
 }
 
 .border-token-border-medium {
-  border-color: #d9d9e3;
   border-color: var(--border-medium);
 }
 
 .border-token-surface-primary {
-  border-color: #fff;
   border-color: var(--surface-primary);
 }
 
@@ -268,7 +306,6 @@ html {
 }
 
 .border-token-surface-tertiary {
-  border-color: #ececf1;
   border-color: var(--surface-tertiary);
 }
 
@@ -365,132 +402,6 @@ html {
   font-weight: 400;
   src: url('$fonts/roboto-mono-latin-400-italic.woff2') format('woff2');
 }
-
-/*
-
-The default ChatGPT fonts, according to OpenAI's brand guidelines, are proprietary and require appropriate font license according to your use case.
-
-They can be purchased here: https://klim.co.nz/buy/soehne/
-
-The fonts in question are (9 total):
-
-> - Söhne (Buch Kursiv, Buch, Halbfett Kursiv, Halbfett, Kraftig Kursiv, Kraftig, Mono Buch Kursiv, Mono Buch, Mono Halbfett)
-
-If you have purchased a license, you can use the commented-out `@font-face` declarations below to include them in your project.
-
-Step 1: Buy whatever license applies to you and allows use of `.woff2` font files (likely web font license).
-Step 2: Place them in ./client/public/fonts/ directory.
-Step 3: Replace the current `fontFamily` config in ./client/tailwind.config.cjs with the following:
-
-```
-    fontFamily: {
-      sans: ['Söhne', 'sans-serif'],
-      mono: ['Söhne Mono', 'monospace'],
-    },
-```
-
-Step 4: Uncomment all Söhne font-face declarations below.
-Step 5: rebuild frontend code: `npm run frontend` (or rebuild docker).
-
-*/
-
-/* @font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: normal;
-  font-weight: 400;
-  src: url("$fonts/soehne-buch.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: italic;
-  font-weight: 400;
-  src: url("$fonts/soehne-buch-kursiv.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: normal;
-  font-weight: 500;
-  src: url("$fonts/soehne-kraftig.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: italic;
-  font-weight: 500;
-  src: url("$fonts/soehne-kraftig-kursiv.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: normal;
-  font-weight: 600;
-  src: url("$fonts/soehne-halbfett.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: italic;
-  font-weight: 600;
-  src: url("$fonts/soehne-halbfett-kursiv.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne Mono;
-  font-style: normal;
-  font-weight: 400;
-  src: url("$fonts/soehne-mono-buch.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne Mono;
-  font-style: normal;
-  font-weight: 700;
-  src: url("$fonts/soehne-mono-halbfett.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne Mono;
-  font-style: italic;
-  font-weight: 400;
-  src: url("$fonts/soehne-mono-buch-kursiv.woff2") format("woff2")
-} */
-
-/* * {
-  box-sizing: border-box;
-  outline: 1px solid limegreen !important;
-} */
-
-/* p small {
-  opacity: 0;
-  animation: fadeIn 3s ease forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} */
-
-/* .LazyLoad {
-  opacity: 0;
-  transition: all 1s ease-in-out;
-} */
 
 select {
   --tw-shadow: 0 0 transparent;
@@ -715,8 +626,8 @@ pre {
 
 .premium-scroll-button:hover:not(:active) {
   transform: translateY(-1.5px) scale(1.02);
-  box-shadow: 
-    0 5px 10px rgba(0, 0, 0, 0.07), 
+  box-shadow:
+    0 5px 10px rgba(0, 0, 0, 0.07),
     0 7px 14px rgba(0, 0, 0, 0.1),
     0 0 0 1px rgba(255, 255, 255, 0.1);
 }
@@ -1413,6 +1324,25 @@ button {
 .dark .btn-neutral:focus {
   box-shadow: 0 0 0 2px var(--ring-primary);
 }
+
+.blue .btn-neutral {
+  --tw-border-opacity: 1;
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+  background-color: var(--surface-secondary);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.blue .btn-neutral:hover {
+  --tw-bg-opacity: 1;
+  background-color: var(--surface-hover);
+}
+
+.blue .btn-neutral:focus {
+  box-shadow: 0 0 0 2px var(--ring-primary);
+}
+
 .btn-small {
   padding: 0.25rem 0.5rem;
 }
@@ -2579,7 +2509,9 @@ html {
 .animate-popover {
   transform-origin: top;
   opacity: 0;
-  transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(0.95) translateY(-0.5rem);
 }
 
@@ -2591,7 +2523,9 @@ html {
 .animate-popover-left {
   transform-origin: left;
   opacity: 0;
-  transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(0.95) translateX(-0.5rem);
 }
 

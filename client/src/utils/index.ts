@@ -61,7 +61,17 @@ export const cardStyle =
   'transition-colors rounded-md min-w-[75px] border font-normal bg-white hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700 dark:bg-gray-800 text-black dark:text-gray-600 focus:outline-none data-[state=open]:bg-gray-50 dark:data-[state=open]:bg-gray-700';
 
 export const defaultTextProps =
-  'rounded-md border border-gray-200 focus:border-gray-400 focus:bg-gray-50 bg-transparent text-sm shadow-[0_0_10px_rgba(0,0,0,0.05)] outline-none focus-within:placeholder:text-text-primary focus:placeholder:text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-gray-400 focus:ring-opacity-20 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:focus:bg-gray-600 dark:focus:border-gray-600 dark:text-gray-50 dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] dark:focus:outline-none';
+  'rounded-md border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100' +
+  ' border-gray-200 hover:border-gray-300 dark:border-gray-600 dark:hover:border-gray-500' +
+  ' focus:border-blue-500 dark:focus:border-blue-400' +
+  ' focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:ring-offset-0' +
+  ' bg-transparent text-sm' +
+  ' shadow-sm hover:shadow-md dark:shadow-none dark:hover:shadow-[0_0_15px_rgba(0,0,0,0.1)]' +
+  ' outline-none' +
+  ' placeholder:text-gray-400 dark:placeholder:text-gray-500' +
+  ' focus:placeholder:text-gray-500 dark:focus:placeholder:text-gray-400' +
+  ' disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50 dark:disabled:bg-gray-700' +
+  ' transition-all duration-200';
 
 export const optionText =
   'p-0 shadow-none text-right pr-1 h-8 border-transparent hover:bg-gray-800/10 dark:hover:bg-white/10 dark:focus:bg-white/10 transition-colors';

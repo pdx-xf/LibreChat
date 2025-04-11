@@ -70,7 +70,7 @@ const Registration: React.FC = () => {
           )}
           aria-invalid={!!errors[id]}
           className="
-            webkit-dark-styles transition-color peer w-full rounded-2xl border border-border-light
+            transition-color peer w-full rounded-2xl border border-border-light
             bg-surface-primary px-3.5 pb-2.5 pt-3 text-text-primary duration-200 focus:border-green-500 focus:outline-none
           "
           placeholder=" "
@@ -195,7 +195,7 @@ const Registration: React.FC = () => {
             </div>
           </form>
 
-          <p className="my-4 text-center text-sm font-light text-gray-700 dark:text-white">
+          <p className="my-4 text-center text-sm font-light text-text-primary">
             {localize('com_auth_already_have_account')}{' '}
             <a
               href="/login"

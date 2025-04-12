@@ -66,7 +66,7 @@ export default function Nav({ links, isCollapsed, resize, defaultActive }: NavPr
                             <Button
                               variant="outline"
                               size="sm"
-                              className="w-full justify-start bg-transparent text-text-secondary data-[state=open]:bg-surface-secondary data-[state=open]:text-text-primary"
+                              className="w-full justify-start bg-transparent text-text-secondary hover:bg-surface-hover data-[state=open]:bg-surface-secondary data-[state=open]:text-text-primary"
                               onClick={(e) => {
                                 if (link.onClick) {
                                   link.onClick(e);

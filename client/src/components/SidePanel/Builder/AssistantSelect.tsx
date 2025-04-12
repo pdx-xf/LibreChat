@@ -283,7 +283,7 @@ export default function AssistantSelect({
       containerClassName="flex-grow"
       searchClassName="dark:from-gray-850"
       searchPlaceholder={localize('com_assistants_search_name')}
-      optionsClass="hover:bg-gray-20/50 dark:border-gray-700"
+      optionsClass="hover:bg-gray-50/50 dark:border-gray-700"
       optionsListClass="rounded-lg shadow-lg dark:bg-gray-850 dark:border-gray-700 dark:last:border"
       currentValueClass={cn(
         'text-md font-semibold text-gray-900 dark:text-white',

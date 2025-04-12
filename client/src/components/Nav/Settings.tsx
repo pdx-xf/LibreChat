@@ -171,7 +171,7 @@ export default function Settings({ open, onOpenChange }: TDialogProps) {
                           'group relative z-10 m-1 flex items-center justify-start gap-2 px-2 py-1.5 transition-all duration-200 ease-in-out',
                           isSmallScreen
                             ? 'flex-1 justify-center text-nowrap rounded-xl p-1 px-3 text-sm text-text-secondary radix-state-active:bg-surface-hover radix-state-active:text-text-primary'
-                            : 'rounded-md bg-transparent text-text-primary radix-state-active:bg-surface-tertiary',
+                            : 'rounded-md bg-transparent text-text-primary radix-state-active:bg-surface-hover',
                         )}
                         value={value}
                         ref={(el) => (tabRefs.current[value] = el)}

@@ -122,7 +122,7 @@ const Nav = ({
       <div
         data-testid="nav"
         className={
-          'nav active max-w-[320px] flex-shrink-0 overflow-x-hidden bg-surface-primary-alt md:max-w-[260px]'
+          'nav active max-w-[320px] flex-shrink-0 overflow-x-hidden md:max-w-[260px]'
         }
         style={{
           width: navVisible ? navWidth : '0px',
@@ -191,14 +191,14 @@ const Nav = ({
                       <Spinner className={cn('m-1 mx-auto mb-4 h-4 w-4 text-text-primary')} />
                     )}
                   </div>
-                  <div className="menu">
+                  <div className="menu mb-2">
                     <button
                       onClick={() => setIsMenuSettingsOpen(true)}
-                      className="flex w-full items-center gap-3 rounded-md px-3 py-3 text-sm text-text-primary hover:bg-surface-secondary"
+                      className="flex w-full items-center gap-3 rounded-md px-3 py-3 text-sm text-text-primary hover:bg-surface-hover"
                     >
                       {/* <GearIcon className="h-4 w-4" />
                       {localize('com_nav_settings')} */}
-                      {'View'}
+                      {'MenuItem'}
                     </button>
                   </div>
                   <MenuSettings open={isMenuSettingsOpen} onOpenChange={setIsMenuSettingsOpen} />

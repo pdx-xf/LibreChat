@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { GearIcon } from '~/components/svg';
-import { useLocalize } from '~/hooks';
+import { useLocalize, TranslationKeys } from '~/hooks';
 import { cn } from '~/utils';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '~/components/ui';
 
 interface MenuSettingsProps {
   open: boolean;
@@ -13,12 +14,12 @@ interface MenuSettingsProps {
 
 export default function MenuSettings({ open, onOpenChange }: MenuSettingsProps) {
   const localize = useLocalize();
-  const [activeTab, setActiveTab] = useState('1');
+  const [activeTab, setActiveTab] = useState('general');
 
-  const menuItems = [
-    { id: '1', label: '1' },
-    { id: '2', label: '2' },
-    { id: '3', label: '3' },
+  const menuItems: { id: string; label: TranslationKeys }[] = [
+    { id: 'general', label: 'com_nav_setting_general' },
+    { id: 'theme', label: 'com_nav_theme' },
+    { id: 'settings', label: 'com_nav_settings' },
   ];
 
   return (
@@ -72,48 +73,41 @@ export default function MenuSettings({ open, onOpenChange }: MenuSettingsProps) 
                   <span className="sr-only">{localize('com_ui_close')}</span>
                 </button>
               </DialogTitle>
-
-              <div className="space-y-4">
-                <Accordion.Root
-                  type="single"
-                  collapsible
-                  className="w-full space-y-2"
-                  value={activeTab}
-                  onValueChange={setActiveTab}
-                >
+              <Tabs value={activeTab} onValueChange={setActiveTab}>
+                <TabsList className="mb-4">
                   {menuItems.map((item) => (
-                    <Accordion.Item
-                      key={item.id}
-                      value={item.id}
-                      className="overflow-hidden rounded-lg border border-border-light dark:border-gray-700"
-                    >
-                      <Accordion.Header>
-                        <Accordion.Trigger className="flex w-full items-center justify-between p-4 text-left hover:bg-surface-secondary dark:hover:bg-gray-800">
-                          <span className="font-medium text-text-primary">
-                            {localize(item.label)}
-                          </span>
-                          <ChevronDownIcon className="h-4 w-4 text-text-primary transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                        </Accordion.Trigger>
-                      </Accordion.Header>
-                      <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                        <div className="bg-surface-primary p-4 dark:bg-gray-900">
-                          {item.id === '1' && (
-                            <div className="text-text-primary">
-                              {localize('com_nav_setting_general')}
-                            </div>
-                          )}
-                          {item.id === '2' && (
-                            <div className="text-text-primary">{localize('com_nav_theme')}</div>
-                          )}
-                          {item.id === '3' && (
-                            <div className="text-text-primary">{localize('com_nav_settings')}</div>
-                          )}
-                        </div>
-                      </Accordion.Content>
-                    </Accordion.Item>
+                    <TabsTrigger key={item.id} value={item.id}>
+                      {localize(item.label)}
+                    </TabsTrigger>
                   ))}
-                </Accordion.Root>
-              </div>
+                </TabsList>
+                <div className="space-y-4">
+                  {menuItems.map((item) => (
+                    <TabsContent className="p-0" key={item.id} value={item.id}>
+                      <Accordion.Root type="single" collapsible className="w-full space-y-2">
+                        <Accordion.Item
+                          value={item.id}
+                          className="overflow-hidden rounded-lg border border-border-light dark:border-gray-700"
+                        >
+                          <Accordion.Header>
+                            <Accordion.Trigger className="flex w-full items-center justify-between p-4 text-left hover:bg-surface-secondary dark:hover:bg-surface-secondary">
+                              <span className="font-medium text-text-primary">
+                                {localize(item.label)}
+                              </span>
+                              <ChevronDownIcon className="h-4 w-4 text-text-primary transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                            </Accordion.Trigger>
+                          </Accordion.Header>
+                          <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                            <div className="bg-surface-primary p-4 dark:bg-gray-900">
+                              <div className="text-text-primary">{localize(item.label)}</div>
+                            </div>
+                          </Accordion.Content>
+                        </Accordion.Item>
+                      </Accordion.Root>
+                    </TabsContent>
+                  ))}
+                </div>
+              </Tabs>
             </DialogPanel>
           </div>
         </TransitionChild>

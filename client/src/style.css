@@ -2703,7 +2703,7 @@ html {
   border-width: 1px;
   border-style: solid;
   border-color: var(--border-light);
-  background-color: hsl(var(--background));
+  background-color: var(--presentation);
   padding: 0.5rem;
   color: var(--text-primary);
   box-shadow:

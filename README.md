@@ -7,11 +7,11 @@
 ## 开启配置
 
 ```bash
-cp .env.example .env
+cp .env.example .env # 修改配置
 
-cp docker-compose.override.yml.example docker-compose.override.yml
+cp docker-compose.override.yml.example docker-compose.override.yml # 修改配置
 
-cp librechat.example.yaml librechat.yaml
+cp librechat.example.yaml librechat.yaml # 修改配置
 
 # 视情况修改配置内容
 ...
@@ -26,6 +26,8 @@ cp librechat.example.yaml librechat.yaml
 npm ci
 
 # 本地开发
+npm frontend:ci
+
 npm run backend:dev
 
 npm run frontend:dev
@@ -46,7 +48,7 @@ cp docker-compose.yml docker-compose-dev.yml
 # 修改 docker-compose-dev.yml
 sed -i '' 's/# *image: ghcr.io\/danny-avila\/librechat-dev:latest/image: librechat:dev/' docker-compose-dev.yml
 # 运行 docker-compose-dev.yml
-docker compose -f docker-compose-dev.yml up -d
+docker compose -f docker-compose-dev.yml -f docker-compose.override.yml up -d
 
 # 生产环境，打包前后端镜像
 docker build -f Dockerfile.multi -t librechat:latest .
@@ -55,7 +57,7 @@ cp deploy-compose.yml docker-compose-prod.yml
 # 修改 docker-compose-prod.yml
 sed -i '' 's/# *image: ghcr.io\/danny-avila\/librechat-dev-api:latest/image: librechat:latest/' docker-compose-prod.yml
 # 运行 docker-compose-prod.yml
-docker compose -f docker-compose-prod.yml up -d
+docker compose -f docker-compose-prod.yml -f docker-compose.override.yml up -d
 ```
 
 ## 修改 LibreChat 有关的内容 （修改后需要重新打包docker）

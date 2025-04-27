@@ -45,18 +45,22 @@ npm run frontend
 docker build -t librechat:dev .
 # 开发环境，只启动后端服务
 cp docker-compose.yml docker-compose-dev.yml
+cp docker-compose.override.yml.example docker-compose.override.yml
 # 修改 docker-compose-dev.yml
 sed -i '' 's/# *image: ghcr.io\/danny-avila\/librechat-dev:latest/image: librechat:dev/' docker-compose-dev.yml
-# 运行 docker-compose-dev.yml
+# 修改 docker-compose.override.yml
+# 运行 docker compose
 docker compose -f docker-compose-dev.yml -f docker-compose.override.yml up -d
 
 # 生产环境，打包前后端镜像
 docker build -f Dockerfile.multi -t librechat:latest .
 # 生产环境，前后端都部署
 cp deploy-compose.yml docker-compose-prod.yml
+cp docker-compose.override.yml.example docker-compose.override.yml
 # 修改 docker-compose-prod.yml
 sed -i '' 's/# *image: ghcr.io\/danny-avila\/librechat-dev-api:latest/image: librechat:latest/' docker-compose-prod.yml
-# 运行 docker-compose-prod.yml
+# 修改 docker-compose.override.yml
+# 运行 docker compose
 docker compose -f docker-compose-prod.yml -f docker-compose.override.yml up -d
 ```
 

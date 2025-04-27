@@ -90,6 +90,10 @@ junit.xml
 **/.venv/
 **/venv/
 
+# docker file
+docker-compose-dev.yml
+docker-compose-prod.yml
+
 # docker override file
 docker-compose.override.yaml
 docker-compose.override.yml

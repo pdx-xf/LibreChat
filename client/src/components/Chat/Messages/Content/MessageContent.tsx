@@ -53,6 +53,7 @@ export const ErrorMessage = ({
       </Suspense>
     );
   }
+  console.log(message, 'testMessage');
   return (
     <Container message={message}>
       <div
@@ -82,6 +83,7 @@ const DisplayMessage = ({ text, isCreatedByUser, message, showCursor }: TDisplay
   );
 
   let content: React.ReactElement;
+  console.log(isCreatedByUser, enableUserMsgMarkdown, text, 'DisplayMessage');
   if (!isCreatedByUser) {
     content = <Markdown content={text} isLatestMessage={isLatestMessage} />;
   } else if (enableUserMsgMarkdown) {

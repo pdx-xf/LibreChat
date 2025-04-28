@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useRef, useEffect } from 'react';
+import React, { memo, useMemo, useRef, useEffect, useState } from 'react';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import supersub from 'remark-supersub';
@@ -174,6 +174,7 @@ type TContentProps = {
 const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
   const LaTeXParsing = useRecoilValue<boolean>(store.LaTeXParsing);
   const isInitializing = content === '';
+  const [currentPage, setCurrentPage] = useState<any>(null);
 
   const currentContent = useMemo(() => {
     if (isInitializing) {
@@ -218,6 +219,61 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
     );
   }
 
+  console.log(currentContent, 'Markdown content');
+  // 截取从data_start开始且以data_end结尾的内容
+  const startIndex = currentContent.indexOf('data_start') + 'data_start'.length;
+  const endIndex = currentContent.indexOf('data_end');
+  // 判断是否存在data_start和data_end
+
+  const hasDataStart = startIndex > -1;
+  const hasDataEnd = endIndex > -1;
+  console.log(startIndex, endIndex, 'startIndex', 'endIndex');
+
+  console.log(hasDataStart, hasDataEnd, 'hasDataStart', 'hasDataEnd');
+
+  if (!hasDataStart || !hasDataEnd) {
+    return (
+      <ArtifactProvider>
+        <CodeBlockProvider>
+          <ReactMarkdown
+            /** @ts-ignore */
+            remarkPlugins={remarkPlugins}
+            /* @ts-ignore */
+            rehypePlugins={rehypePlugins}
+            components={
+              {
+                code,
+                a,
+                p,
+                artifact: Artifact,
+              } as {
+                [nodeType: string]: React.ElementType;
+              }
+            }
+          >
+            {currentContent}
+          </ReactMarkdown>
+        </CodeBlockProvider>
+      </ArtifactProvider>
+    );
+  }
+
+  const validContent = currentContent.substring(startIndex, endIndex).trim();
+  const dataArr = JSON.parse(validContent);
+  console.log(dataArr, 'dataArr');
+  // 获取 data_start之前的内容
+  const contentBeforeDataStart = currentContent.substring(0, startIndex - 'data_start'.length);
+
+  const handleClickPage = (item: any) => {
+    setCurrentPage((prev) => {
+      if (prev) {
+        return null;
+      } else {
+        return { ...item };
+      }
+    });
+  };
+
   return (
     <ArtifactProvider>
       <CodeBlockProvider>
@@ -237,8 +293,47 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
             }
           }
         >
-          {currentContent}
+          {contentBeforeDataStart}
         </ReactMarkdown>
+        <div>
+          {dataArr.map((item) => {
+            return (
+              <span key={item.pageNumber} className="">
+                {item.documentChunk}
+                <span
+                  className="mx-1 inline-flex h-5 w-5 cursor-pointer items-center justify-center text-xs text-gray-500 transition-all duration-300 hover:bg-gray-100 hover:text-blue-500"
+                  onClick={() => handleClickPage(item)}
+                >
+                  [{item.pageNumber}]
+                </span>
+              </span>
+            );
+          })}
+        </div>
+        <br />
+        {/* 5列 */}
+        <div className="grid grid-cols-5 gap-4">
+          {dataArr.map((item, index) => {
+            return (
+              <div
+                className={
+                  'flex cursor-pointer items-center justify-center rounded border py-2 transition-all duration-300 hover:bg-gray-100 hover:text-blue-500'
+                }
+                key={item.pageNumber}
+                onClick={() => handleClickPage(item)}
+                // eslint-disable-next-line i18next/no-literal-string
+              >
+                Source{item.pageNumber}
+              </div>
+            );
+          })}
+        </div>
+        {currentPage && (
+          <div>
+            <p>{currentPage.documentPath}</p>
+            <div>{currentPage.documentChunk}</div>
+          </div>
+        )}
       </CodeBlockProvider>
     </ArtifactProvider>
   );

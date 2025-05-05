@@ -23,7 +23,7 @@ cp librechat.example.yaml librechat.yaml # 修改配置
 
 
 # 安装依赖
-npm reinstall
+npm run reinstall
 
 # 本地开发
 npm run backend:dev

@@ -220,6 +220,7 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
   }
 
   console.log(currentContent, 'Markdown content');
+
   // 截取从data_start开始且以data_end结尾的内容
   const startIndex = currentContent.indexOf('data_start') + 'data_start'.length;
   const endIndex = currentContent.indexOf('data_end');
@@ -231,7 +232,16 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
 
   console.log(hasDataStart, hasDataEnd, 'hasDataStart', 'hasDataEnd');
 
-  if (!hasDataStart || !hasDataEnd) {
+  // 获取 result: 到 data_start 之间的内容
+  const resultIndex = currentContent.indexOf('result:');
+  const hasResult = resultIndex > -1;
+  const resultContent = currentContent.substring(
+    resultIndex + 'result:'.length,
+    startIndex - 'data_start'.length,
+  );
+  console.log(resultContent, 'resultContent');
+
+  if (!hasResult) {
     return (
       <ArtifactProvider>
         <CodeBlockProvider>
@@ -256,13 +266,38 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
         </CodeBlockProvider>
       </ArtifactProvider>
     );
+  } else {
+    if (!hasDataStart || !hasDataEnd) {
+      return (
+        <ArtifactProvider>
+          <CodeBlockProvider>
+            <ReactMarkdown
+              /** @ts-ignore */
+              remarkPlugins={remarkPlugins}
+              /* @ts-ignore */
+              rehypePlugins={rehypePlugins}
+              components={
+                {
+                  code,
+                  a,
+                  p,
+                  artifact: Artifact,
+                } as {
+                  [nodeType: string]: React.ElementType;
+                }
+              }
+            >
+              {resultContent}
+            </ReactMarkdown>
+          </CodeBlockProvider>
+        </ArtifactProvider>
+      );
+    }
   }
 
   const validContent = currentContent.substring(startIndex, endIndex).trim();
   const dataArr = JSON.parse(validContent);
   console.log(dataArr, 'dataArr');
-  // 获取 data_start之前的内容
-  const contentBeforeDataStart = currentContent.substring(0, startIndex - 'data_start'.length);
 
   const handleClickPage = (item: any) => {
     setCurrentPage((prev) => {
@@ -293,7 +328,7 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
             }
           }
         >
-          {contentBeforeDataStart}
+          {resultContent}
         </ReactMarkdown>
         <div>
           {dataArr.map((item) => {
